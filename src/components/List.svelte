@@ -3,7 +3,7 @@
 	export let elements = [];
 	export let value = [];
 
-	// $: if (elements && value && value.length != elements.length) value.length = elements.length; // value length sync
+	$: if (elements && value && value.length != elements.length) value.length = elements.length; // value length sync
 	export let addElement = function () {
 		elements = [...elements, {type:"Empty", text:"New"}];
 	}
