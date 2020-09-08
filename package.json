@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "dev2": "rollup -c rollup.config2.js -w",
+    "dev:main": "rollup -c main.rollup.config.js -w",
+    "dev:components": "rollup -c components.rollup.config.js -w",
     "start": "sirv public"
   },
   "devDependencies": {

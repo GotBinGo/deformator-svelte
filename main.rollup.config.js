@@ -29,11 +29,9 @@ function serve() {
 
 export default {
 	input: 'src/main.js',
-	inlineDynamicImports: true, //kell ???
 	output: {
 		sourcemap: true,
 		format: 'esm',
-		name: 'app',
 		file: 'public/build/bundle.js'
 	},
 	plugins: [

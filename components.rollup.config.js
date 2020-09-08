@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import glob from 'glob';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -26,25 +27,22 @@ function serve() {
 		}
 	};
 }
-
-export default {
-	input: 'src/nested.js',
-	inlineDynamicImports: true, //kell ???
+export default glob.sync('src/components/*.svelte').map(x => ({
+	input: x,
 	output: {
 		sourcemap: true,
 		format: 'esm',
-		name: 'app',
-		file: 'public/bundle.js'
+		file: x.replace('src/', 'public/').replace('.svelte', '.js')
 	},
 	plugins: [
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('bundle2.css');
-			}
+			// // we'll extract any component CSS out into
+			// // a separate file - better for performance
+			// css: css => {
+			// 	css.write('bundle.css');
+			// }
 		}),
 
 		// If you have external dependencies installed from
@@ -73,4 +71,4 @@ export default {
 	watch: {
 		clearScreen: false
 	}
-};
+}));

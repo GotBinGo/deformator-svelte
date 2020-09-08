@@ -1,13 +1,8 @@
 <script>
-	import Nested from './Nested/Nested.svelte';
-	let name = "TOmi";
+	import Manager from './editor/Manager.svelte';
 </script>
-OK
-<main>
-		{#await import('/bundle.js') then value}
-			<svelte:component this={value.default} />
-		{/await}
-</main>
+
+<Manager></Manager>
 
 <style>
 </style>
