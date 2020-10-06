@@ -4,4 +4,4 @@
 </script>
 
 <label for="inp">{data.label}</label>
-<input name="inp" type="text" bind:value />
+<input style="width: 100%;" name="inp" type="text" bind:value />

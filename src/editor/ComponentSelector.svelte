@@ -1,23 +1,50 @@
 <script>
     import { getContext } from "svelte";
     import store from "../common";
-    let { close } = store.get('simple-modal')
-    export let onOkay = () => {};
-    function _onOkay() {
-      onOkay({type:'List', elements: [{type:'https://a.ic.hu/bundle.js', name:"YoooMoo"}, {type:'Button', text:"Korte"}]});
-      close();
+    export let close;
+
+    function onButton() {
+      close({type:'Button', text:'123'});
     }
-    export let message;
-
-
+    function onText() {
+      close({type:'TextInput', label:''});
+    }
+    function onList() {
+      close({type:'List', elements:[{type:'Button', text:'123'}, {type:'Button', text:'123'}]});
+    }
+    function onSplit() {
+      close({type:'Split', elements:[{type:'Button', text:'123'}, {type:'Button', text:'123'}]});
+    }
+    function onUrl() {
+      close({type:prompt()});
+    }
+    function onTorol() {
+      close(false);
+    }
 </script>
   
-  <style>
-    h2 {
-          font-size: 2rem;
-          text-align: center;
-      }
-  </style>
-  
-  <h2>🎉 {message} 🍾</h2>
-  <button on:click={_onOkay}>Hello</button>
+<style>
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .modal-body {
+    background-color: white;
+  }
+</style>
+
+<div class="modal-body">
+  <h2>🎉 New Component 🍾</h2>
+  <button on:click={onButton}>Button</button>
+  <br>
+  <button on:click={onText}>Text</button>
+  <br>
+  <button on:click={onList}>List</button>
+  <br>
+  <button on:click={onSplit}>Split</button>
+  <br>
+  <button on:click={onUrl}>URL</button>
+  <br>
+  <button on:click={onTorol}>Torol</button>
+  <br>
+</div>

@@ -1,13 +1,12 @@
 <script>
 import Manager from './editor/Manager.svelte';
-import Modal from './modal/Modal.svelte';
 import ComponentSelector from './editor/ComponentSelector.svelte'
 import store from './common';
+import ModalHost from './modal/ModalHost.svelte';
 store.set('ComponentSelector', ComponentSelector)
 </script>
-<Modal>
-	<Manager></Manager>
-</Modal>
+<Manager></Manager>
+<ModalHost></ModalHost>
 
 <style>
 </style>

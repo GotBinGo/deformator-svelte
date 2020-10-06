@@ -1,14 +1,37 @@
 <script>
+import store from '../common';
+
     import Editor from './Editor.svelte';
-    let data = {type:'List', elements: [{type:'https://a.ic.hu/bundle.js', name:"YoooMoo"}, {type:'Button', text:"Korte"}]};
+    let data = {type:'List', elements: [
+        {type:'Button', text:"Korte"},
+        {type:'Split', elements:[{type:'Button', text:'123'}, {type:'Button', text:'123'}]},
+        {type:'TextInput', label:''},
+        {type:'Empty', label:''},
+    ]};
+    let value;
     function reset() {
-        data = {type:'Empty', elements: []};
+        data = {type:'Empty', elements: []};;
+        value = clear(value);
     }
+    
+    function clear(v) {
+        if(Array.isArray(v)) {
+            return v.map(x => clear(x))
+        } else {
+            return undefined;
+        }
+    }
+
     function save() {
         localStorage.data = JSON.stringify(data);
     }
     function load() {
         data = JSON.parse(localStorage.data);
+    }
+    
+    store.set('allowPopup', !store.get('allowPopup'));
+    function allowPopup() {
+        store.set('allowPopup', !store.get('allowPopup'));
     }
 </script>
 <div style="height: 100%; display: flex; flex-direction: column;">
@@ -16,13 +39,13 @@
     <button on:click={reset}>reset</button>
     <button on:click={save}>save</button>
     <button on:click={load}>load</button>
-    <button>colors</button>
+    <!-- <button>colors</button>
     <button>canAdd</button>
     <button>hoverAdd</button>
-    <button>layoutMode</button>
-    <button>allowPopup</button>
-    <button>sidebar</button>
-    <button>sidebar Debug</button>
+    <button>layoutMode</button> -->
+    <button on:click={allowPopup}>allowPopup</button>
+    <!-- <button>sidebar</button>
+    <button>sidebar Debug</button> -->
     def:
     <mat-form-field style="width: 50px; max-height: 53px;">
         <input style="width: 50px;" matInput type="number" required>
@@ -37,5 +60,5 @@
     </mat-form-field>
     <br>
     </div>
-    <Editor bind:data></Editor>
+    <Editor bind:value bind:data></Editor>
 </div>

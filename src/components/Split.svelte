@@ -1,19 +1,28 @@
 <script >
-	import Container from "../base/Container.svelte";
+	export let Container;
+
 	export let data;
-	data.elements = [];
 	export let value = [];
 
-	// $: if (elements && value && value.length != elements.length) value.length = elements.length; // value length sync
-	export let addElement = function () {
-		elements = [...elements, {type:"Empty", text:"New"}];
+	$: if (data.elements && value && value.length != data.elements.length) value.length = data.elements.length; // value length sync
+	export let addElement = function (e) {
+		data.elements = [...data.elements, {type:"Empty", text:"New"}];
+		e.stopPropagation();
+	}
+
+	function deleteChild(i) {
+		console.log('del', i)
+		value.splice(i,1);
+		value = value;
+		data.elements.splice(i,1);
+		data.elements = data.elements;
 	}
 </script>
 
-<div style="display: flex; width: 100%; flex-direction: column">
+<div style="display: flex; width: 100%; flex-direction: row">
 	{#if data.elements.length}
-		{#each data.elements as item, i (i)}
-			<Container bind:data={item} bind:value={value[i]}></Container>
+		{#each data.elements as item, i (item)}
+			<Container deleteSelf={() => deleteChild(i)} bind:data={item} bind:value={value[i]}></Container>
 		{/each}
 	{:else}
 		<div class="center">&lt;&lt;Üres lista&gt;&gt;</div>

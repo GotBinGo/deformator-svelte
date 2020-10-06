@@ -2,10 +2,10 @@
   import store from "../common";
   export let data;
   export let value;
-  
+  import {open as openModal} from '../modal';
   let Container = store.get('Container')
-  let {open} = store.get('simple-modal')
   let ComponentSelector = store.get('ComponentSelector')
+  export let deleteSelf = () => {};
 
 
   let componentName;
@@ -31,22 +31,25 @@
     return imported;
   }
 
-  function outerClick(e) {
-    console.log('outer', componentName)
-    open(ComponentSelector, {
-      message: "It's a popup!",
-      onOkay: x => {
-        console.log('okay', x);
-        data = x;
-      },
-      onClose: x => {
-        console.log('close');
-        data = {type:'Button', text:"Korte"}
-      } }, {}, {
-
-    });
+  async function outerClick(e) {
     e.stopPropagation();
+
+    // if(e.target !== target) return;
+    if(!store.get('allowPopup')) return;
+
+    let a = await openModal(ComponentSelector, {props: { message:'123'}}).afterClosed();
+    console.log(a);
+    if(a) {
+      data = a;
+    } else if(a === false) {
+      console.log('call dele self')
+      deleteSelf();
+    }
   }
+  let target;
+
+  let oldData; //TODO this puts value into data
+  $: {if(oldData != data) {oldData = data; value = data.value}; if(data.value !== value) data.value = value};
 
 </script>
 
@@ -61,7 +64,7 @@
   {#await getComponent(componentName)}
     Betöltés ...
   {:then component}
-    <div on:click={outerClick} style="width: 100%; display: flex;border: 1px solid black">
+    <div bind:this={target} on:click={outerClick} style="width: 100%; display: flex;border: 1px solid black">
       <svelte:component this={component} {Container} bind:data bind:value></svelte:component>
     </div>
   {:catch ex}

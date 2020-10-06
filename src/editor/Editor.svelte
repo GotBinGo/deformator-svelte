@@ -9,8 +9,10 @@ store.set('Container', Container);
 store.set('simple-modal', getContext('simple-modal'));
 
 export let data;
-let value;
-$: console.log(value);
+export let value;
+
+
+$: console.log(data);
 
 </script>
 
@@ -18,5 +20,5 @@ $: console.log(value);
 	<div style="display: flex; flex-grow: 1; flex-direction: column">
 		<Container bind:data bind:value></Container>
     </div>
-    <Side></Side>
+    <Side bind:data bind:value></Side>
 </editor>
