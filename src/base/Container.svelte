@@ -68,7 +68,9 @@
       <svelte:component this={component} {Container} bind:data bind:value></svelte:component>
     </div>
   {:catch ex}
-    A komponens nem található a könyvtárban ({componentName})
+    <div on:click={outerClick} style="width: 100%; display: flex;border: 1px solid black">
+      A komponens nem található a könyvtárban ({componentName})
+    </div>
   {/await}
 {:else}
   <div class="empty">Nincs itt semmi :(</div>
