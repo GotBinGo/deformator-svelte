@@ -36,6 +36,9 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		replace({ //TODO workaround for
+			'outros.c.push': 'if (outros === undefined) { block.o(local); return }\noutros.c.push'
+	  	}),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,

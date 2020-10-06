@@ -1,19 +1,21 @@
 <script >
-	export let elements = [];
-	export let value = [];
 	export let Container;
+	export let data;
+	export let value = [];
+	// value = value || [];
 
-	$: if (elements && value && value.length != elements.length) value.length = elements.length; // value length sync
+	$: if (data.elements && value && value.length != data.elements.length) value.length = data.elements.length; // value length sync
+	
 	export let addElement = function (e) {
-		elements = [...elements, {type:"Empty", text:"New"}];
+		data.elements = [...data.elements, {type:"Empty", text:"New"}];
 		e.stopPropagation();
 	}
 </script>
 
 <div style="display: flex; width: 100%; flex-direction: column">
-	{#if elements.length}
-		{#each elements as item, i (i)}
-			<Container bind:data={item} bind:value={value[i]}></Container>
+	{#if data.elements.length}
+		{#each data.elements as item, i (i)}
+			<Container bind:data={item} bind:value={(value)[i]}></Container>
 		{/each}
 	{:else}
 		<div class="center">&lt;&lt;Üres lista&gt;&gt;</div>

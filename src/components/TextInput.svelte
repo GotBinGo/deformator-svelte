@@ -1,7 +1,7 @@
 <script>
-	export let label;
+	export let data;
 	export let value;
 </script>
 
-<label for="inp">{label}</label>
+<label for="inp">{data.label}</label>
 <input name="inp" type="text" bind:value />

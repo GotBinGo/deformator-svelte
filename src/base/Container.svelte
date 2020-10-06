@@ -32,8 +32,20 @@
   }
 
   function outerClick(e) {
-    open(ComponentSelector, { message: "It's a popup!" });
-    e.preventDefault();
+    console.log('outer', componentName)
+    open(ComponentSelector, {
+      message: "It's a popup!",
+      onOkay: x => {
+        console.log('okay', x);
+        data = x;
+      },
+      onClose: x => {
+        console.log('close');
+        data = {type:'Button', text:"Korte"}
+      } }, {}, {
+
+    });
+    e.stopPropagation();
   }
 
 </script>
@@ -50,7 +62,7 @@
     Betöltés ...
   {:then component}
     <div on:click={outerClick} style="width: 100%; display: flex;border: 1px solid black">
-      <svelte:component this={component} {Container} {...data} bind:value></svelte:component>
+      <svelte:component this={component} {Container} bind:data bind:value></svelte:component>
     </div>
   {:catch ex}
     A komponens nem található a könyvtárban ({componentName})

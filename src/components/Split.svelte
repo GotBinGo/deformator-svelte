@@ -1,6 +1,7 @@
 <script >
 	import Container from "../base/Container.svelte";
-	export let elements = [];
+	export let data;
+	data.elements = [];
 	export let value = [];
 
 	// $: if (elements && value && value.length != elements.length) value.length = elements.length; // value length sync
@@ -10,8 +11,8 @@
 </script>
 
 <div style="display: flex; width: 100%; flex-direction: column">
-	{#if elements.length}
-		{#each elements as item, i (i)}
+	{#if data.elements.length}
+		{#each data.elements as item, i (i)}
 			<Container bind:data={item} bind:value={value[i]}></Container>
 		{/each}
 	{:else}
