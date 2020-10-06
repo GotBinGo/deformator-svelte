@@ -1,10 +1,13 @@
 <script>
-  import { getContext } from "svelte";
+  import store from "../common";
   export let data;
   export let value;
   
-  let GenericComponent = getContext('GenericComponent');
-  
+  let Container = store.get('Container')
+  let {open} = store.get('simple-modal')
+  let ComponentSelector = store.get('ComponentSelector')
+
+
   let componentName;
   let imported;
 
@@ -28,6 +31,11 @@
     return imported;
   }
 
+  function outerClick(e) {
+    open(ComponentSelector, { message: "It's a popup!" });
+    e.preventDefault();
+  }
+
 </script>
 
 <style>
@@ -41,8 +49,8 @@
   {#await getComponent(componentName)}
     Betöltés ...
   {:then component}
-    <div style="width: 100%; display: flex;border: 1px solid black">
-      <svelte:component this={component} {GenericComponent} {...data} bind:value></svelte:component>
+    <div on:click={outerClick} style="width: 100%; display: flex;border: 1px solid black">
+      <svelte:component this={component} {Container} {...data} bind:value></svelte:component>
     </div>
   {:catch ex}
     A komponens nem található a könyvtárban ({componentName})

@@ -1,6 +1,12 @@
 <script>
-import Container from '../base/Container.svelte';
+import Container from './../base/Container.svelte';
+
 import Side from './Side.svelte';
+import store from '../common';
+import { getContext } from 'svelte';
+
+store.set('Container', Container);
+store.set('simple-modal', getContext('simple-modal'));
 
 export let data;
 let value;

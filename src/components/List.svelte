@@ -1,11 +1,12 @@
 <script >
-	import Container from "../base/Container.svelte";
 	export let elements = [];
 	export let value = [];
+	export let Container;
 
 	$: if (elements && value && value.length != elements.length) value.length = elements.length; // value length sync
-	export let addElement = function () {
+	export let addElement = function (e) {
 		elements = [...elements, {type:"Empty", text:"New"}];
+		e.stopPropagation();
 	}
 </script>
 
