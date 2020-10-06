@@ -1,7 +1,8 @@
 <script >
-	import Container from "../base/Container.svelte";
 	export let elements = [];
 	export let value = [];
+
+	export let GenericComponent;
 
 	// $: if (elements && value && value.length != elements.length) value.length = elements.length; // value length sync
 	export let addElement = function () {
@@ -12,7 +13,7 @@
 <div style="display: flex; width: 100%; flex-direction: column">
 	{#if elements.length}
 		{#each elements as item, i (i)}
-			<Container bind:data={item} bind:value={value[i]}></Container>
+			<GenericComponent bind:data={item} bind:value={value[i]}></GenericComponent>
 		{/each}
 	{:else}
 		<div class="center">&lt;&lt;Üres lista&gt;&gt;</div>

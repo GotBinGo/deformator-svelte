@@ -1,7 +1,10 @@
 <script>
-  import { getContext } from "svelte";
+  import { getContext } from 'svelte';
+  import ComponentSelector from '../editor/ComponentSelector.svelte';
   export let data;
   export let value;
+  
+  // const open = getContext('simple-modal').open;
   
   let GenericComponent = getContext('GenericComponent');
   
@@ -28,6 +31,12 @@
     return imported;
   }
 
+  function outerClick(e){
+    console.log(componentName);
+    open(ComponentSelector, { message: "It's a popup!" });
+    // e.stopPropagation();
+  }
+
 </script>
 
 <style>
@@ -39,14 +48,14 @@
 
 {#if componentName}
   {#await getComponent(componentName)}
-    Betöltés ...
+    Loading...
   {:then component}
-    <div style="width: 100%; display: flex;border: 1px solid black">
+    <div on:click={outerClick} style="width: 100%; display: flex;border: 1px solid black">
       <svelte:component this={component} {GenericComponent} {...data} bind:value></svelte:component>
     </div>
   {:catch ex}
-    A komponens nem található a könyvtárban ({componentName})
+    Component not found ({componentName})
   {/await}
 {:else}
-  <div class="empty">Nincs itt semmi :(</div>
+  <div class="empty">Missing componentName</div>
 {/if}

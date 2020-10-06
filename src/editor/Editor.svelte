@@ -1,11 +1,14 @@
 <script>
 import Container from '../base/Container.svelte';
 import Side from './Side.svelte';
+import { setContext } from 'svelte';
 
+setContext('GenericComponent', Container);
+
+    
 export let data;
 let value;
 $: console.log(value);
-
 </script>
 
 <editor style="display: flex; flex-grow: 1;">

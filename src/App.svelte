@@ -1,8 +1,10 @@
 <script>
 	import Manager from './editor/Manager.svelte';
+	import Modal from './modal/Modal.svelte';
 </script>
-
-<Manager></Manager>
+<Modal>
+	<Manager></Manager>
+</Modal>
 
 <style>
 </style>
