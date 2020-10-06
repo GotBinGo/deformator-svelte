@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import glob from 'glob';
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -35,6 +36,9 @@ export default glob.sync('src/components/*.svelte').map(x => ({
 		file: x.replace('src/', 'public/').replace('.svelte', '.js')
 	},
 	plugins: [
+		replace({ //TODO workaround for
+			  'outros.c.push': 'if (outros === undefined) { block.o(local); return }\noutros.c.push'
+		}),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,

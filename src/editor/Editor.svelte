@@ -1,7 +1,8 @@
 <script>
 import Container from '../base/Container.svelte';
 import Side from './Side.svelte';
-let data = {type:'List', elements: [{type:'Button', text:"Alma"}, {type:'Button', text:"Korte"}]};
+
+export let data;
 let value;
 $: console.log(value);
 

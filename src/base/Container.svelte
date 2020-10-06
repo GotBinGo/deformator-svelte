@@ -17,7 +17,11 @@
   }
 
   function getComponent(componentName) {
-    return import(`/components/${componentName}.js`).then(x => (imported = x).default);
+    if(componentName.endsWith('.js')) {
+      return import(`${componentName}`).then(x => (imported = x).default);
+    } else {
+      return import(`/components/${componentName}.js`).then(x => (imported = x).default);
+    }
   }
 
   export function getCurrentComponentClass() {
