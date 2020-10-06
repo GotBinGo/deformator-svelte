@@ -1,9 +1,9 @@
 <script>
-	export let name = "123"
+	export let name = "123adfasdf"
 </script>
 
 <main>
-	Tomif {name}
+	Tomifffiif {name}
 </main>
 
 <style>
