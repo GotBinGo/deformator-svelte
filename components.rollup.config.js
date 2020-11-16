@@ -5,6 +5,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import glob from 'glob';
 import replace from '@rollup/plugin-replace';
+import postcss from "rollup-plugin-postcss";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -59,6 +60,18 @@ export default glob.sync('src/components/*.svelte').map(x => ({
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		postcss({
+			extract: false,
+			minimize: true,
+			use: [
+			  ['sass', {
+				includePaths: [
+				  './src/theme',
+				  './node_modules'
+				]
+			  }]
+			]
+		  }),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated

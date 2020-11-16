@@ -5,3 +5,4 @@
 
 <label for="inp">{data.label}</label>
 <input style="width: 100%;" name="inp" type="text" bind:value />
+

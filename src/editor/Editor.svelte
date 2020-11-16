@@ -93,12 +93,8 @@ function saveWait() {
       saveState();
     }
     n--;
-  },150)
+  },100)
 }
-
-  afterUpdate(() => {
-      console.log('the component has been updated');	
-  });
 
 function upd(data) {
   if(JSON.stringify(data) === ld) return;
