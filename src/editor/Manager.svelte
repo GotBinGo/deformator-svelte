@@ -1,13 +1,19 @@
 <script>
-import store from '../common';
+    import store from '../common';
+    import  Automerge from 'automerge';
+
 
     import Editor from './Editor.svelte';
-    let data = {type:'List', elements: [
-        {type:'Button', text:"Korte"},
-        {type:'Split', elements:[{type:'Button', text:'123'}, {type:'Button', text:'123'}]},
-        {type:'TextInput', label:''},
-        {type:'Empty', label:''},
-    ]};
+    // let data = {type:'List', elements: [
+    //     {type:'Button', text:"Korte"},
+    //     {type:'Split', elements:[{type:'Button', text:'123'}, {type:'Split', elements:[{type:'Button', text:'123'}, {type:'Button', text:'123'}]}]},
+    //     {type:'TextInput', label:''},
+    //     {type:'Empty', label:''},
+    // ]};
+    // let data = {type:'TextInput', label:''};
+    // let data = {type:'Split', elements:[{type:'Button', text:'123'}]};
+    // let data = Automerge.from({data:{type:'Empty'}});
+    let data = {type:'TextInput', label:''};
     let value;
     function reset() {
         data = {type:'Empty', elements: []};;
@@ -29,7 +35,6 @@ import store from '../common';
         data = JSON.parse(localStorage.data);
     }
     
-    store.set('allowPopup', !store.get('allowPopup'));
     function allowPopup() {
         store.set('allowPopup', !store.get('allowPopup'));
     }

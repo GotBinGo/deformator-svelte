@@ -3,10 +3,15 @@
 	export let data;
 	export let value = [];
 
-	$: if (data.elements && value && value.length != data.elements.length) value.length = data.elements.length; // value length sync
+	$: if (data.elements && value && value.length != data.elements.length) {
+		let arr = []; 
+		for(let i = 0; i < data.elements.length; i++) arr.push(null);
+		value = arr; 
+	}; // value length sync
 	
 	export let addElement = function (e) {
-		data.elements = [...data.elements, {type:"Empty", text:"New"}];
+		data.elements = [...data.elements, {type:"Empty", text:"New", value: null}];
+		value.push(null)
 		e.stopPropagation();
 	}
 

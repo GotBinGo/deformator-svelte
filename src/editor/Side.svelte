@@ -1,6 +1,10 @@
 <script>
 	export let data;
 	export let value;
+	export let history;
+	let diff = {};
+
+
 </script>
 <app-side style="border-left: 4px dashed gray; display: flex; width: 450px; min-width: 450px;">
 <div style="padding: 5px; width: 100%">
@@ -11,6 +15,15 @@
 	<button mat-raised-button color="primary" >paste</button>&nbsp;
 	<br>
 	<br>
+	<br>
+	History:
+	<pre>
+		{JSON.stringify(history.map(x => x.change.message), undefined, '  ')}
+	</pre>
+	Diff:
+	<pre>
+		{JSON.stringify(diff, undefined, '  ')}
+	</pre>
 	Form:
 	<pre>
 		{JSON.stringify(data, undefined, '  ')}

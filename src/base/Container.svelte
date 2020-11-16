@@ -38,7 +38,6 @@
     if(!store.get('allowPopup')) return;
 
     let a = await openModal(ComponentSelector, {props: { message:'123'}}).afterClosed();
-    console.log(a);
     if(a) {
       data = a;
     } else if(a === false) {
@@ -48,8 +47,8 @@
   }
   let target;
 
-  let oldData; //TODO this puts value into data
-  $: {if(oldData != data) {oldData = data; value = data.value}; if(data.value !== value) data.value = value};
+  // let oldData; //TODO this puts value into data
+  // $: {if(oldData != data) {oldData = data; value = data.value}; if(data.value !== value) data.value = value};
 
 </script>
 
